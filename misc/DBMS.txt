@@ -1,0 +1,47 @@
+DATABASES
+
+INTRODUCTION
+> Two tier and three tier architecture: In two tier the application login is either buried inside the user interface of the client or within the databse on the server. ex: contact mngmnt system using MS-Access or Railway Reservation System, etc.
+				In latter the application login or process lives in the middle-tier, it is seperated from the data and the user interface. More scalable, robust and flexible. The logic is seperated from the data and user interface. It is secure as client is not allowed to communicate with the database directly. ex: Designing Registration form which contains text box, label, button or a large website on the internet, etc.
+
+>SQL : is the database lang by the use of which we can perform certain operations on the existing database.
+	The SQL commands are mainly categorzed into four categories as:
+	1. DDL : Data Definition Language - commands are used to define the database schema, create and modify the structure of db objects. CREATE, DROP, ALTER, TRUNCATE, COMMENT, RENAME.
+	2. DQL : Data Query Language - These statements are used for performing queries on the data within schemaobjects. The purpose is to get some schema relation based on the query passed to it. SELECT.
+	3. DML : Data Manipulation Language - Deals with the manipulation of data present in the database. INSERT, UPDATE, DELETE
+	4. DCL : Data Control Language - Includes commands such as GRANT and REVOKE which mainly deals with the rights, permission and other controls of the database system. GRANT: give user privelages to the database, REVOKE: withdraw privilages.
+	* TCL(transaction control language) : deals with te transaction within the database.
+
+>IMPORTANT TERMS
+1. Instance : It is the state of the data at any particular moment, current set of occurence., Evry time we update the state say we insert, dete or modify the value, it chages from one state to other, At the given time, each schema has its own set of instances.
+2. Schema : A database schema is the skeleton structure that represents the logical view of the entire database. It is the overall description of the database specified during the database design. interesting point that values may change in the schema but the structure of schema does not change. The schema only displays the record types (entities) and names of data items(attributes) but not shows relation among the files. STORES schema -> store_name  store_id  store_add  city  state  zip_code
+3. Sub-Scema : It can be defined as the subset or sub-level of schema that has the same properties as the schema. In simple words it is just a effective plan or the schema for the view.. it is interesting to note that it provides the users a window through which the user can view only that part of database which is of matter of interest to him. It Identifies subset of areas, sets, records, data names defined in database that is of interest to him.
+* Quickly we can summarize the above things, information/data in database at particular moment is known as instance,physical arrangement of data as it appears in database can be defined as schema, and the logical view of data as it appears to the application can be called as sub schema.
+
+>Implementation of the database
+	The following are steps in the implementation phase:
+		Install the DBMS.
+		Tune the setup variables according to the hardware, software and usage conditions.
+		Create the database and tables.
+		Load the data.
+		Set up the users and security.
+		Implement the backup regime.
+
+> Data Abstraction in DBMS and Its levels - It is the hiding unnecessary details from the user. Three level in order to achieve Data Independence. D.I. means users and data should not directly interact with each other. The user should be at different level and data at other.
+	1. View Level : A student sees datas like marks, fee paid status, attendance differently while a staff will see it differently. THe staff may have more privelages of updating data that student, so all in all there is different view of same data to different users.
+	2. Conceptual/Logical level: We create blueprint of the data at the conceptual level. This level tells how the data is actually stored and structured. we can use use various models such as relational model while storing the data. The structure of the table like its fields.columns and rows are defined here.
+	3. Physical Level or Internal schema :  the Physical level tells us that where the data is actually stored i.e. it tells the actual location of the data that is being stored by the user. The Database Administrators(DBA) decide that which data should be kept at which particular disk drive, how the data has to be fragmented, where it has to be stored etc. Though we see the data in the form of tables at view level the data here is actually stored in the form of files only.
+
+> Referential Integrity Rule in DBMS is based on Primary and Foreign Key. The Rule defines that a foreign key have a matching primary key. Reference from a table to another table should be valid. the referential integrity rule states that the Primary Key and Foreign Key have same data types.
+> RDBMS use B+ trees to store data internally. B+ tree is a special data structure allowing to efficiently store (i.e. access and update) a large sorted dictionary on a block storage device (i.e. HDD or SSD).
+  => How it is done?
+	-> Database loads data into memory in pieces and apply the conditions that you have asked for. For simple explanation when you don't have index on your table, lets say you have 10 GB of memory which database can use and your average row size is of 10 kB and there are 10M rows which will be equal to 100GB. Now when you will query the database, it will dump first 10 GB of data from disk to memory and find the data which satisfies your condition. Then it will dump next 10GB of data and so on.
+	-> Have you noticed anything about query made on unindexed table. Its slow because all of the data have to be loaded into the memory and read one by one to get you results. Same thing will happen in this case, read will become slow. There is something called Buffer Pool, which is responsible for caching of data which is responsible for performance. For more on that you might want to read	
+	-> Now, when you have indexes on your table and size is bigger than the memory. Then the database will load a branch of tree into the memory and save results, then it will load another branch and so on up till the condition is valid.
+
+> Schema Diagrams
+	1. ER Model : Sets up the conceptual model of database in the form of entity types and their relationships.
+	2. Relational model : Conversion from conceptual model to realtional model which can be implemented using RDBMS lang. like Oracle SQL, MySQL etc.
+		- Relational model represents hoe the data is stored in relational databses.A relational stores the data in the form of (relations)tables.
+
+	

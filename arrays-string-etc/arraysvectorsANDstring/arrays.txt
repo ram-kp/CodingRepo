@@ -1,0 +1,886 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+#define mini(a)    ( min_element((a).begin(), (a).end()) - (a).begin())
+#define maxi(a)    ( max_element((a).begin(), (a).end()) - (a).begin())
+
+void sortWA(vector<int> &a){
+    int n = a.size();
+    int p_0=0, p_2=n-1;
+    for(int i = 0; i < n; ++i) {
+        if(a[i] == 0){
+            swap(a[i], a[p_0]);
+            p_0++;
+        }
+    }
+    for(int i = n-1; i>=0; i--) {
+        if(a[i] == 2){
+            swap(a[i], a[p_2]);
+            p_2--;
+        }
+    }
+}
+
+void neativeOneSide(vector<int> &a){
+    int n_index=0;
+    for(unsigned i = 0; i < a.size(); ++i) {
+        if(a[i] < 0){
+            swap(a[i], a[n_index]);
+            n_index++;
+        }
+    }
+}
+
+
+
+void arrIntersection(vector<int> &a, vector<int> &b){
+    int hsh_size = max(*max_element(a.begin(), a.end()), *max_element(b.begin(), b.end()));
+    cout << hsh_size << "\n";
+    vector<int> hsh(hsh_size+1);
+    for(int i=0; i<a.size(); ++i){
+        hsh[a[i]] += 1;
+    }
+    for(int i=0; i<b.size(); ++i){
+        hsh[b[i]] += 1;
+    }
+    for(auto&& i : hsh) {
+        cout << i << " ";
+    }
+    cout << "\n";
+    for(int i = 0; i < hsh.size(); ++i) {
+        if(hsh[i]>1){
+            cout << i << " ";
+        }
+    }
+    cout << "\n";
+}
+int kadaneAlgo(vector<int> &a){
+    int max_ending_here = 0;
+    int max_so_far = INT_MIN;
+    for(int i = 0; i < a.size(); ++i) {
+        max_ending_here += a[i];
+        if(max_ending_here > max_so_far)
+            max_so_far = max_ending_here;
+        if (max_ending_here < 0)
+            max_ending_here = 0;
+    }
+    return max_so_far;
+}
+
+int minimH(vector<int> &a, int k){  // -ve height can be considered
+    int dec_i = 0;
+    for (int i = 0; i < a.size(); ++i)
+    {
+        int chk = a[i];
+        a[i] += k;
+        if(chk+k >= a[i+1]){
+            dec_i = i+1;
+            break;
+        }
+    }
+    for(; dec_i<a.size(); dec_i++)
+        a[dec_i] -= k;
+    return a[a.size()-1]-a[0] ;
+}
+
+
+
+
+int minDiffH(vector<int> &a, int k){    // negative heights cannot be taken
+    int ans = INT_MAX;
+    int n= a.size();
+    for (int i = 0; i < n; ++i)
+    {
+        if (a[i+1] < k)
+            continue;
+        int curMin = min(a[0]+k, a[i+1]-k);
+        int curMax = max(a[i]+k, a[n-1]-k);
+        cout << "\ncurMin: " << curMin << " curMax: " << curMax << "\n";
+        ans = min(ans, curMax-curMin);
+        cout << "ans: " << ans << "\n";
+    }
+    return ans;
+}
+
+int minMoves(vector<int> &a){
+    int n = a.size();
+    int moves = 0;
+    for (int i = 0; i < n; )
+    {
+        int l = a[i];
+        cout << "l: " << l << "\n";
+        if(i+l >= n-1){
+            cout << "entered here\n";
+            moves++;
+            cout << "moves: " << moves << "\n";
+            return moves;
+        }
+        int mx_i = i;
+        for(int j=i+1; j<i+l+1; j++){
+            if(a[j] >= a[mx_i])
+                mx_i = j;
+        }
+        cout << "max_i: " << mx_i << " mx_ele: "<< a[mx_i] << "\n";
+        moves++;
+        i += mx_i-i;
+    }
+    cout << "moves : " << moves << "\n";
+    return moves;
+}
+
+int findDup(vector<int> &a){
+    map<int, int> hash;
+    int i;
+    for (i = 0; i < a.size(); ++i)
+    {
+        if (hash[a[i]] == 1){
+            break;
+        }
+        hash[a[i]] = 1;
+    }
+    for(auto&& i : hash) {
+        cout << i.first << " " << i.second << "\n";
+    }
+    return a[i];
+}
+
+int findDup2(vector<int> &a){
+    for (int i = 0; i < a.size(); ++i)
+    {
+        if(a[abs(a[i])] < 0){
+            return abs(a[i]);
+        }
+        else
+            a[abs(a[i])] = a[abs(a[i])]* -1;
+    }
+}
+
+void mergeWspace(set<int> &s1, set<int> &s2){
+    for(auto i=s2.begin(); i!=s2.end(); ++i){
+        s1.insert(*i);
+    }
+    for(auto&& a : s1) {
+        cout << a << " ";
+    }
+    cout << "\n";
+}
+
+void mergeWEspace(vector<int> &a, vector<int> &b){
+    int n = a.size();
+    int m = b.size();
+    cout << "a_size: " << n << " b_size: " << m << "\n";
+    int i=n-1, j=0;
+
+    while(i>=0 && j<=m-1) {
+        // cout << "i: " << i << " j: " << j << "\n";
+        if(a[i] >= b[j]){
+            // cout << "swapping occured\n";
+            swap(a[i], b[j]);
+            i--;
+            j++;
+            continue;
+        }
+        i--;
+    }
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    for (int k = 0; k < a.size(); ++k)
+    {
+        cout << a[k] << " ";
+    }
+    for (int k = 0; k < b.size(); ++k)
+    {
+        cout << b[k] << " ";
+    }
+    cout << "\n";
+}
+
+
+
+
+
+/*void mergeIntervals(set<pair<int, int>> &a){
+    set<pair<int, int>> merged;
+    for (auto it = a.begin(); it!=a.end(); ++it)
+    {
+        if(merged.empty() || ((*it).first > (*(--merged.end())).second)){
+            merged.insert({(*it).first, (*it).second});
+        }
+        else{
+            (*(--merged.end())).second = max((*it).second, (*(--merged.end())).second);
+        }
+    }
+    for(auto i : merged) {
+        cout << i.first << " " << i.second << "\n";
+    }
+}*/
+
+
+void nxtPermut(vector<int> &a){
+    int i;
+    int n = a.size();
+    for (i = n-1; i>=0 ; --i)
+        {
+            if(i==0){
+                break;
+            }
+            if(a[i]>a[i-1]){
+                int min_g = INT_MAX;
+                int min_g_i=0;
+                // cout << "i: " << i << "\n";
+                for (int k=i; k < n; ++k)
+                {
+                    if(a[k]>a[i-1] && (a[k]-a[i-1] < min_g)){
+                        min_g_i = k;
+                    }
+                }
+                swap(a[i-1], a[min_g_i]);
+                break;  
+            }
+            else{
+                continue;
+            }
+        }  
+    sort(a.begin()+i, a.end());
+    for(auto i : a) {
+         cout << i << " ";
+     } 
+     cout << "\n";
+
+
+}
+
+
+
+
+
+
+
+void inverCt(vector<int> &a){
+    // int n = a.size();
+    // brute force: compare each element with every other element ahead in the array
+
+}
+
+void stockProfit(vector<int> &a){
+    int n = a.size();
+    int minprice = INT_MAX;
+    int maxprofit = 0;
+    for (int i = 0; i < n; ++i){
+        if(a[i] < minprice)
+            minprice = a[i];
+        else if(a[i]-minprice > maxprofit)
+            maxprofit = a[i]-minprice;
+    }
+    cout << maxprofit << "\n";
+}
+
+void countPairs(vector<int> &a, int sum){
+    map<int, int> hash;
+    int ct = 0;
+    for(int i=0; i<a.size(); ++i){
+        if(hash[a[i]]){
+            ct++;
+        }
+        hash[sum-a[i]] = 1;
+    }
+    cout << ct << "\n";
+}
+
+
+void commonIn3(vector<int> &a, vector<int> &b, vector<int> &c){
+    map<int, int> hash;
+    vector<int> cmn;
+    for (int i = 0; i < a.size(); ++i)
+    {
+        hash[a[i]] += 1;
+    }
+    for (int i = 0; i < b.size(); ++i)
+    {
+        hash[b[i]] += 1;
+    }
+    for (int i = 0; i < c.size(); ++i)
+    {
+        hash[c[i]] += 1;
+    }
+    for (int i = 0; i < hash.size(); ++i)
+    {
+        if (hash[i] >=3)
+        {
+            cmn.push_back(i);
+        }
+    }
+    for(auto i : cmn) {
+        cout << i << " ";
+    }
+    cout << "\n";
+}
+
+void commonIn(vector<int> &a, vector<int> &b, vector<int> &c){
+    map<int, int> hash;
+    vector<int> cmn_int;
+    vector<int> cmn;
+    int i=0, j=0;
+    while(i<a.size() && j<b.size()){
+        if(a[i] < b[j])
+            i++;
+        else if(b[j] < a[i])
+            j++;
+        else{
+            cmn_int.push_back(a[i]);
+            i++;
+            j++;
+        }
+    }
+    i=0;
+    j=0;
+    while(i<cmn_int.size() && j<c.size()){
+        if(cmn_int[i] < c[j])
+            i++;
+        else if(c[j] < cmn_int[i])
+            j++;
+        else{
+            cmn.push_back(a[i]);
+            i++;
+            j++;
+        }
+    }
+    for(auto i : cmn) {
+        cout << i << " ";
+    }
+    cout << "\n";
+}
+
+
+
+void alternatePosNeg(vector<int> &a){
+    int negCnt = 0;
+    int posCnt = 0;
+    for (int i = 0; i < a.size(); ++i){
+        if(a[i] < 0)
+            negCnt++;
+    }
+    for (int i = 0; i < a.size(); ++i)
+    {
+        if (a[i] >= 0)
+            posCnt++;
+    }
+    if(negCnt < posCnt){
+        int neg_i=0;
+        for (int i = 0; i < a.size(); ++i){
+            if(a[i] < 0){
+                swap(a[neg_i], a[i]);
+                neg_i++;
+            }
+        }
+        int stR = neg_i;
+        int stL = neg_i-1;
+        while(stL>=0 && stR<=a.size()){
+            swap(a[stL], a[stR]);
+            stL -= 2;
+            stR += 2;
+        }
+    } 
+    else{
+        int pos_i = 0;
+        for (int i = 0; i < a.size(); ++i){
+            if(a[i]>=0){
+                swap(a[pos_i], a[i]);
+                pos_i++;
+            }
+        }
+        int stR = pos_i;
+        int stL = pos_i-1;
+        while(stL>=0 && stR<=a.size()){
+            swap(a[stL], a[stR]);
+            stL -= 2;
+            stR += 2;
+        }
+    }
+    for(auto&& i : a) {
+        cout << i << " ";
+    }
+    cout << "\n";
+
+}
+
+void zeroSum(vector<int> &a){
+    int n=a.size();
+    unordered_map<int, int> hsh;
+    int sum = 0;
+    int i =0;
+    for(i=0; i<n; i++){
+        sum += a[i];
+        if(hsh[sum] == 1 || sum==0 || a[i]==0){
+            cout << "YEAH\n";
+            break;
+        }
+        hsh[sum] = 1;
+    }
+    for(auto i : hsh) {
+        cout << i.first << " " << i.second << "\n";
+    }
+    if(i == n){
+        cout << "NOPES\n";
+    }
+}
+
+const long long M = 1e9+10;
+
+void bigFactorial(int n){
+    long long fact=1;
+    for(int i=1; i<=n; ++i){
+        cout << fact << "\n";
+        fact = (fact*i)%M;
+    }
+    cout << fact << "\n";
+}
+
+void bigFactorial1(int num){
+    vector<int> arr;
+    arr.push_back(1);
+    int carry = 0;
+    for (int i=2; i<=num; ++i)
+    {
+        for(int j=arr.size()-1 ; j>=0; --j){
+            int prod = arr[j]*i+carry;
+            carry = prod/10;
+            arr[j] = prod%10;
+        }
+        if(carry == 0) continue;
+        while(carry!=0){
+            arr.insert(arr.begin(), carry%10);
+            carry /= 10;
+        }
+        carry =0;
+    }
+    for(auto&& e : arr) {
+        cout << e <<"";
+    }
+    cout << "\n";
+}
+
+long long maximProductSubArr(vector<long long> &a){
+    long long prod = 1;
+    int n = a.size();
+    for (int i = 0; i < n; ++i)
+    {
+        if(a[i]!=0){
+            prod *= a[i];
+            a[i] = prod;
+        }else{
+            a[i] = 0;
+            prod = 1;
+        }
+    }
+    for(auto e : a) {
+        cout << e << " ";
+    }
+    cout << "\n";
+    return *max_element(a.begin(), a.end()) ;
+
+}
+
+ll maximProd(vector<int> &A){
+    int N = A.size();
+    ll maxP , minP , res ;
+
+    maxP = minP = res = 1 ;
+
+    for( int i = 0 ; i < N ; i++ )
+    {
+    ll x = A[i];
+    //cout << "A[i]: " << A[i] << "\n";
+    if( x < 0 ) swap( maxP , minP );
+    //cout << "maxP: " << maxP << " minP: " << minP << "\n";
+    maxP = max( x , x*maxP );
+    minP = min( x , x*minP );
+    //cout << "maxP: " << maxP << " minP: " << minP << "\n";
+    //cout << "res1: " << res << "\n";
+    res = max( res , maxP );
+    cout << "res2: " << res << "\n";
+    }
+    return res;
+}
+
+void longestConsecSeq(vector<int> &a){
+    int n =*max_element(a.begin(), a.end())+1;
+    int hsh[n+1] = {0};
+    for (int i = 0; i < a.size(); ++i)
+    {
+        hsh[a[i]] = 1;
+    }
+    for (int i = 0; i < n+1; ++i)
+    {
+        cout << i << " : " << hsh[i] << "\n";
+    }
+    cout << "\n";
+    int maxLen = 0;
+    for (int i = 0; i < n-1;)
+    {
+        int curLen = 0;
+        while(hsh[i]==hsh[i+1] && hsh[i]==1){
+            curLen++;
+            i++;
+        }
+
+        // cout << "current Length: " << curLen << "\n";
+        maxLen = curLen+1>maxLen?curLen+1:maxLen;
+        curLen = 0;
+        i++;
+    }
+    cout << maxLen << "\n";
+}
+
+void moreThanK(vector<int> &a, int k){
+    map<int, int> hsh;
+    for (int i = 0; i < a.size(); ++i)
+    {
+        hsh[a[i]]+=1;
+    }
+    int count = 0;
+    for(auto i : hsh) {
+        count = i.second>(a.size()/k)?count+1:count;
+    }
+    cout << "count : " << count << "\n";
+}
+
+void buySellShareTwice(vector<int> &a){
+    int maxprofit = 0;
+    int minprice = INT_MAX;
+    int minprice_i;
+    int maxprice_i;
+    for (int i = 0; i < a.size(); ++i)
+    {
+        if(a[i] < minprice){
+            //cout << "entered here\n";
+            minprice_i = i;
+            //cout << "minprice index: " << minprice_i << "\n";
+            minprice = a[i];
+            //cout << "minPrice : " << minprice << "\n";
+        }
+        else if(a[i]-minprice > maxprofit){
+            maxprice_i = i;
+            maxprofit = a[i]-minprice;
+        }
+    }
+    cout << "1: buy and sell at : " << a[minprice_i] << " and " << a[maxprice_i] << "\n";
+
+    int maxprofitL = 0;
+    int maxprofitR = 0;
+    minprice = INT_MAX;
+    cout << "min_price_i " << minprice_i << "\n";
+    for (int j = 0; j < minprice_i; ++j)
+    {
+        if(a[j] < minprice){
+            cout << "j: " << j << "\n";
+            minprice = a[j];
+        }
+        else if(a[j]-minprice > maxprofitL){
+            maxprofitL = a[j]-minprice;
+            cout << "minprice : " << minprice << "\n";
+        }
+    }
+    minprice = INT_MAX;
+    for (int j = maxprice_i+1; j < a.size(); ++j)
+    {
+        if(a[j] < minprice){
+            minprice = a[j];
+        }
+        else if(a[j]-minprice > maxprofitR)
+            maxprofitR = a[j]-minprice;
+    }
+    cout << "maxProfitLeft: " << maxprofitL << " maxProfitRight: " << maxprofitR << "\n";
+    int mp = (maxprofit+maxprofitL)>(maxprofit+maxprofitR)?(maxprofit+maxprofitL):(maxprofit+maxprofitR);
+    cout << "max prof B&S share twice: " << mp << "\n";
+}
+
+int find3numbers(vector<int> &a, int k){
+    int n = a.size();
+    sort(a.begin(), a.end());
+    int found = 0;
+    for(int i=0; i<n-2; ++i){
+        int x = k-a[i];
+        int l=i+1, r=n-1;
+        while(l<r){
+            if(a[l]+a[r] > x)
+                r--;
+            else if(a[l]+a[r] < x)
+                l++;
+            else{
+                cout << a[i] << " " << a[l] << " " << a[r] << "\n";
+                found = 1;
+                l++;
+                r--;
+            }
+        }
+    }
+    return found;
+}
+
+int trappingRainWater(vector<int> &a){
+    int n = a.size();
+    int left = 0, right = n-1;
+    int i=left ,j=right-1;
+    int water = 0;
+    while(i<=j){
+        if(a[left] < a[right]){
+            //cout << "a[left] : " << a[left] <<" a[i]: " << a[i] << "\n";
+            if(a[i] <= a[left]){
+                water += a[left]-a[i]; 
+            } else
+                left = i;
+            i++;
+            //cout << water << " i: " << i << " a[left]: " << a[left] <<  "\n";
+        }   //7 4 0 9
+        else{
+            if(a[j] <= a[right]){
+                water += a[right]-a[j];
+            } else
+                right = j;
+            j--;
+            // cout << water << " j: " << j << "\n";
+        }
+    }
+    // cout << "water : " << water << "\n";
+    return water;
+}
+
+long long findMinDiffChoc(vector<long long> a, long long n, long long m){
+        sort(a.begin(), a.end());
+        for(auto i : a) {
+            cout << i << " ";
+        }
+        cout<< "\n";
+        long long minDiff = 1e15;
+        long long minChoc = INT_MAX;
+        long long maxChoc = INT_MAX;
+        for(int i=0; i<=n-m; ++i){
+            if(a[i+m-1]-a[i] < minDiff){
+                minChoc = a[i];
+                maxChoc = a[i+m-1];
+                minDiff = a[i+m-1]-a[i];
+            }
+        }
+        cout << minChoc << " " << maxChoc << "\n";
+        cout << "minDiff : " << minDiff << "\n";
+    } 
+
+int smallSubarr(vector<int> &a, int k){
+    int n = a.size();
+    int i=0, j;
+    int sum = 0;
+    int minlen = a.size()+1;
+    int len = 0;
+    for(j=0; j<n; ++j){
+        sum += a[j];
+        cout << "sum: " << sum << "\n";
+        while(sum>k && i<=j){
+            minlen = (j-i+1<minlen)?j-i+1:minlen;
+            sum -= a[i++];
+        }
+    }
+    return minlen==a.size()+1?0:minlen;
+}
+
+void threeWayPartition(vector<int> &arr, int a, int b){
+    int n = arr.size();
+    int left=0, right=n-1;
+    for(int i=0 ; i<n; ++i){
+        // cout << "a: " << a << "\n";
+        if(arr[i]<a){
+            swap(arr[left], arr[i]);
+            left++;
+        }
+    }
+    for(int i=right ; i>=0; --i){
+        // cout << "b: " << b << "\n";
+        if(arr[i] > b){
+            swap(arr[right], arr[i]);
+            right--;
+        }
+    }
+}
+
+int minSwaps(vector<int> &a, int k){
+    int n = a.size();
+    int left = 0, nswp=0;
+    for (int i = 0; i < n; ++i)
+    {
+        if(a[i]<=k){
+            int x = a[i];
+            swap(a[i], a[left]);
+            // cout << "a[i]: " << a[i] << " a[left]: " <<a[left] << "\n";
+            if(a[i] != x)
+                nswp++;
+            // cout << "nswp: " << nswp << "\n";
+            // cout << "left: " << left << "\n";
+            left++;
+        }
+    }
+    return nswp;
+}
+
+void medianOfTwoSortedArray(vector<int> &a, vector<int> &b){
+    vector<int> c;
+    int n = a.size();
+    int m = b.size();
+    int i=0, j=0;
+    int count = 0;
+    while(i<n || j<m) {
+        if(i<n && (a[i] < b[j]) || j==m){
+            c.push_back(a[i]);
+            i++;
+        }
+        else{
+            c.push_back(b[j]);
+            j++;
+        }
+        cout << count << "\n";
+        if(count == (m+n)/2){
+            if((m+n)%2 != 0){
+                cout << c[(m+n)/2] << "\n";
+            }else{
+                cout << c[((m+n)/2)-1] << " " << c[(m+n)/2] << "\n";
+            }
+            break;
+        }
+        count++;
+    }
+    for(auto e : c) {
+        cout << e << " ";
+    }
+}
+
+
+void spiral_traversal(int ** a , int n, int m){
+    int r_start=0, r_end=n-1, c_start=0, c_end=m-1;
+    
+    while(r_start<=r_end && c_start<=c_end){
+        // print left to right
+        for(int col=c_start; col<=c_end; ++col)
+            cout << a[r_start][col] << " ";
+        r_start++;
+
+        // print top to bottom
+        for(int row=r_start; row<=r_end; ++row)
+            cout << a[row][c_end] << " ";
+        c_end--;
+
+        // print right to left
+        if(r_start <= r_end){
+            for(int col=c_end; col>=c_start; --col)
+                cout << a[r_end][col] << " ";
+        }
+        r_end--;
+
+        // print down to top
+        if(c_start<=c_end){
+            for(int row=r_end; row>=r_start; --row)
+                cout << a[row][c_start] << " ";
+        }
+        c_start++;
+
+    }
+
+}
+
+bool binSearchGeneric(vector<int> &arr, int k){
+    int i=0, j=arr.size()-1, mid;
+    while(j-i>1){
+        mid = (i+j)/2;
+        if(arr[mid] <= k){
+            i = mid;
+        }else {
+            j=mid-1;
+        }
+    }
+    if(arr[i] == k || arr[j] == k)
+        return true;
+}
+
+int largestRectHistogram(vector<int> &a){
+    int n = a.size();
+    vector<int> left(6);
+    vector<int> right(6);
+    vector<int> area(6);
+    stack<int> s;
+    for(int i=0; i<n; ++i){
+        // cout << "i: " << i << "\n";
+        while( !s.empty() && a[s.top()] >=a[i] ){
+            // cout << "deleted: " << s.top() << "\n";
+            s.pop();
+        }
+        if(s.empty()){
+            left[i] = 0;
+            // cout << "left[i]:" << left[i] << "\n";
+        }
+
+        else{
+            left[i] = s.top()+1;
+            // cout << "left[i]:" << left[i] << "\n";
+        }
+        s.push(i);
+        // cout << "s.top: " << s.top() << "\n";
+    }
+    while(!s.empty()) s.pop();
+
+    for(int i=n-1; i>=0; --i){
+        // cout << "i: " << i << "\n";
+        while( !s.empty() && a[s.top()] >=a[i] ){
+            // cout << "deleted: " << s.top() << "\n";
+            s.pop();
+        }
+        if(s.empty()){
+            right[i] = n-1;
+            // cout << "left[i]:" << left[i] << "\n";
+        }
+
+        else{
+            right[i] = s.top()-1;
+        }
+        s.push(i);
+    }
+    /*cout << "\n";
+    for(auto&& i : right) {
+        cout << i << " ";
+    }
+    cout << "\n";*/
+    int maxA = INT_MIN;
+    for(int i=0; i<n; ++i){
+        area[i] = (right[i]-left[i]+1)*a[i];
+        // cout << area[i] << "\n";
+        if(area[i]>maxA)
+            maxA = area[i];
+    }
+    return maxA;
+
+}
+
+int main()
+{
+    int n, m;
+    cin >> n >>m;
+    vector<vector<int> > a(n);
+    for (int i = 0; i < n; ++i)
+        for(int j=0; j<m; ++j){
+            int x;
+            cin >> x;
+            a[i].push_back(x);
+        }
+    for(int i=1; i<n; ++i){
+        for(int j=0; j<m; ++j){
+            if(a[i][j]==1){
+                a[i][j] += a[i-1][j];
+            }
+        }
+    }
+    int maxArea = INT_MIN;
+    for(int i=0; i<n; ++i){
+        int ar = largestRectHistogram(a[i]);
+        if(ar>maxArea)
+            maxArea = ar;
+    }
+    cout << "Max area formed by ones is: " << maxArea;
+    return 0;
+}

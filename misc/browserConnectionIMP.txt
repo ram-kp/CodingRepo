@@ -1,0 +1,31 @@
+
+Summary
+And that’s a wrap! It took 3 requests to successfully access Google’s homepage (and many subsequent requests to load all the linked assets). Let us summarise everything we have learned so far.
+
+The first thing the browser does with a URL (e.g. google.com) is perform a DNS lookup and get its IP address (e.g. 216.58.200.142 ).
+
+The IP address returned by the DNS server could be an IPv4 or IPv6 address.
+
+Popular websites use DNS load balancers to distribute incoming web traffic across multiple servers (based on geolocation, server load and other parameters).
+
+
+
+// How Browsers establishes web connection
+
+The browser establishes a TCP connection with the web server.
+
+For insecure web requests (http), the default port is 80. For secure web requests (https), the default port is 443.
+
+Once the underlying TCP connection is successfully established, HTTP requests are sent to the web server.
+
+There are different types of HTTP requests to perform four basic CRUD operations on resources stored on the server: Create, Read, Update and Delete.
+
+Web servers can force browsers to use https by using HTTP redirect responses (like 301 Moved Permanently or 307 Temporary Redirect)
+
+When a successful HTTP request is made, the web server performs the requested CRUD operation and returns a success response (200 OK).
+
+The resource returned by the web server could be in any of several supported formats (e.g. HTML). The content-type field in the response headers is used to specify the type used (e.g. text/html).
+
+The browser renders the page using the HTML response. If there are linked images, scripts and/or stylesheets, they are fetched using subsequent HTTP requests until all resources have been loaded.
+
+The browser is done rendering the requested URL when all resources have been loaded successfull

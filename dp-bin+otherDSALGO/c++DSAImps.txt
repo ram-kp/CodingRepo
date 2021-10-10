@@ -1,0 +1,403 @@
+// int main()
+// {
+//     cout << "hello world!\n";
+//     string s;
+//     cin >> s;
+//     int n = s.length();
+
+// 	vector<vector<int>> dp(n, vector<int> (n,0));
+//     for(int g=0; g<n; g++){
+//         for(int i=0,j=g; j<n; i++, j++){
+//             if(g==0){
+//                 dp[i][j] = 1;
+//             }
+//             else if(g==1){
+//                 dp[i][j] = s[i]==s[j] ? 3:2;
+//             }
+//             else{
+//                 dp[i][j] = s[i]==s[j] ? dp[i+1][j]+dp[i][j-1]+1 : dp[i+1][j]+dp[i][j-1]-dp[i+1][j-1];
+//             }
+//         }
+//     }
+    // cout << dp[0][n-1] << "\n";
+    
+// 	return 0;
+// }
+
+int stringSearch(string s, string in[], int r, int c, int row_max, int col_max, int i){
+    cout << r << "," << c << "\n";
+    int found = 0;
+    if(r<row_max && c<col_max && r>=0 && c>=0 && in[r][c]==s[i]){
+        cout << "entered if part \n";
+        char match = in[r][c];
+        cout << match << "\n";
+        cout << "i: " << i << "\n";
+        in[r][c] = '0';
+        if(i==s.length()-1){
+            cout << "found\n";
+            found = 1;
+        } else {
+            found+=stringSearch(s, in, r+1, c, row_max, col_max, i+1);
+            found+=stringSearch(s, in, r-1, c, row_max, col_max, i+1);
+            found+=stringSearch(s, in, r, c-1, row_max, col_max, i+1);
+            found+=stringSearch(s, in, r, c+1, row_max, col_max, i+1);
+            found+=stringSearch(s, in, r-1, c-1, row_max, col_max, i+1);
+            found+=stringSearch(s, in, r-1, c+1, row_max, col_max, i+1);
+            found+=stringSearch(s, in, r+1, c-1, row_max, col_max, i+1);
+            found+=stringSearch(s, in, r+1, c-1, row_max, col_max, i+1);
+        }
+        cout << "r,c " << r << " " << c << "\n";
+        in[r][c] = match;
+    }
+    return found;
+}
+
+
+
+
+// int main()
+// {
+//     cout << "hello world!\n";
+//     string needle = "BC";
+
+//     string input[] = { "BBABBM",
+//                        "CBMBBA",
+//                        "IBABBG",
+//                        "GOZBBI",
+//                        "ABBBBC",
+//                        "MCIGAM" };
+
+//     int count = 0;
+//     for(int i=0; i<6; i++){
+//         for(int j=0; j<input[0].length(); j++){
+//             count += stringSearch(needle, input, i, j, 6, 6, 0);
+//         }
+//     }
+//     cout << "count : " << count << "\n";
+// 	return 0;
+// }
+// 1x36
+// 2x18
+// 3x13
+// 4x9
+// 6x6  6 getting counted twice
+// 9x4
+// 13x3
+// 18x2
+// 36x1
+
+
+// Finding the count and sum of divisors
+// only interate till underroot n times while finding the divisiors
+// 1x11 <-> 11x1, 1x12 2x6 3x4 <-> 4x3 6x2 12x1
+
+void romanToDecimal(string s){
+    map<char, int> rMap;
+    rMap.insert({'I', 1});
+    rMap.insert({'V', 5});
+    rMap.insert({'X', 10});
+    rMap.insert({'L', 50});
+    rMap.insert({'C', 100});
+    rMap.insert({'D', 500});
+    rMap.insert({'M', 1000});
+    int len = s.length();
+    int decVal = 0;
+    for(int i=0; i<len;){
+        if(i!=len-1 && rMap[s[i]]< rMap[s[i+1]]){
+            decVal += ( rMap[s[i+1]]-rMap[s[i]] );
+            i+=2;
+        }
+        else{
+            decVal += rMap[s[i]];
+            i+=1;
+        }
+    }
+    cout << decVal << "\n";
+}
+
+void longestCommonPrefix(vector<string>& strs) {
+    unordered_set<char> longCP;
+    string prefix = "";
+    int count = 0;
+    for(int i=0; i<strs[0].length(); ++i){
+        for(int j=0; j<strs.size()-1; ++j){
+            if((strs[j][i]!='\0' && strs[j+1][i]!='\0')  && strs[j][i] == strs[j+1][i]){
+                count++;
+                // cout << "count " << count << "\n";
+                if(count == strs.size()-1)
+                    longCP.insert(strs[0][i]);
+            }
+            else{
+                // cout << "breaked loop: " << count << "\n";
+                break;
+            }
+        }
+        count = 0;
+        // for(auto &e:longCP) { cout << e << " "; }
+        // cout << "\n";
+    }  
+    for(auto &e: longCP){
+        prefix.push_back(e);
+    }      
+    reverse(prefix.begin(), prefix.end());
+    cout << prefix << "\n";
+}
+
+// void divisorsDetails(){
+    //     int n;
+//     cin >> n;
+//     int ct = 0;
+//     int sum = 0;
+//     for(int i=1; i*i<=n; i++){  //0(n^1/2)
+//         if(n%i == 0){
+//             cout << i << " " << n/i << "\n";
+//             ct+=1;
+//             sum+=i;
+//             if(n/i != i){
+//                 ct+=1;
+//                 sum+= n/i;
+//             }
+//         }
+//     }
+//     cout << ct << " " << sum << "\n"; 
+// }
+
+
+// int n;
+
+// string s;
+
+// bool prime[100];
+
+// void solve() {
+//     for (int i = 0; i < n; i++) {
+//         if (s[i] == '1' || s[i] == '4' || s[i] == '6' || s[i] == '8' || s[i] == '9') {
+//             cout << 1 << endl;
+//             cout << s[i] << endl;
+//             return;
+//         }
+//     }
+//     for (int i = 0; i < n; i++) {
+//         for (int j = i + 1; j < n; j++) {
+//             if (!prime[(s[i] - '0') * 10 + (s[j] - '0')]) {
+//                 cout << 2 << endl;
+//                 cout << s[i] << s[j] << endl;
+//                 return;
+//             }
+//         }
+//     }
+//     exit(42);
+// }
+
+// int main() {
+//     for (int i = 2; i < 100; i++) {
+//         prime[i] = true;
+//         for (int j = 2; j * j <= i; j++) {
+//             if (i % j == 0) {
+//                 prime[i] = false;
+//             }
+//         }
+//     }
+//     int t;
+//     cin >> t;
+//     while (t--) {
+//         cin >> n;
+//         cin >> s;
+//         solve();
+//     }
+// }
+int minFlips (string S)
+{
+    int cnt1=0, cnt2=0;
+    for(int i=0; i<S.length(); ++i){
+        if((i%2==0) && S[i]=='1'){
+            cnt1++;
+        }
+        else if((i%2!=0) && S[i]=='0') {
+            cnt1++;
+        }
+        else if((i%2==0) && S[i]=='0'){
+            cnt2++;
+        }
+        else if((i%2!=0) && S[i]=='1'){
+            cnt2++;
+        }
+    }
+    return cnt1<cnt2?cnt1:cnt2;
+}
+void allSubSeq(vector<int> &v, int i, vector<int> &holder){
+    // Base condition
+    if(i==v.size()){
+        for(auto &e: holder){
+            cout << e << " ";
+        }
+        cout << "\n";
+        return;
+    }
+    // Not Taking the number into account 
+    allSubSeq(v, i+1, holder);
+
+    // Taking the number into account
+    holder.push_back(v[i]);
+    allSubSeq(v, i+1, holder);
+    holder.pop_back();
+}
+void secFrequent (string arr[], int n)
+{
+    map<string, int> strCounts;
+    for(int i=0; i<n; i++){
+        strCounts[arr[i]] += 1;
+    }
+    for(auto e: strCounts){
+        cout << e.first << " " << e.second << "\n";
+    }
+    set<int> ctSorted;
+    for(auto it=strCounts.begin(); it!=strCounts.end(); it++){
+        ctSorted.insert(it->second);
+    }
+    auto secI = ctSorted.end();
+    secI--;
+    secI--;
+    string secEle;
+    for(auto it=strCounts.begin(); it!=strCounts.end(); it++){ 
+        if(it->second == *secI)  {
+            secEle = it->first;
+            break;
+        }
+    }
+    cout << secEle << "\n";
+}
+
+vector<vector<string> > Anagrams(vector<string>& string_list) {
+    vector<vector<string>> groups;
+    int hashmap[26] = {0};
+    for(int i=0; i<string_list.size()-1; i++){
+        if(!(string_list[i]=="null")){
+            continue;
+        }
+        vector<string> tempGRP;
+        tempGRP.push_back(string_list[i]);
+
+        for(int k=0; k<string_list[i].length(); k++){
+            hashmap[string_list[i][k]-97]+=1;
+        }
+
+
+
+        for(int j=i+1; j<string_list.size(); j++){
+            if(!(string_list[j]=="null")){
+                continue;
+            }
+            for(int l=0; l<string_list[j].length(); l++){
+                hashmap[string_list[j][l]-97]-=1;
+            }
+            int z;
+            for(z=0; z<26; z++){
+                if(hashmap[z]!=0){
+                    break;
+                }
+            }
+            if(z==26){
+                tempGRP.push_back(string_list[j]);
+                string_list[j] = "null";
+            }
+        }
+        groups.push_back(tempGRP);
+    }
+    for(int x=0; x<groups.size(); x++){
+        for(auto &e:groups[x]){
+            cout << e << " ";
+        }
+        cout << "\n";
+    }
+}
+
+void mythicalDetails(){
+    int x, m;
+    cin >> x >> m;
+    int sum = x;
+    while(sum%m != 0){
+        
+    }
+}
+
+void primeFactOptimal(int n){   // 0(sqrt(N))
+    vector<int> prime_factors;
+    for(int i=2; i*i<=n; ++i){
+        while(n%i == 0){
+            prime_factors.push_back(i);
+            n /= i;
+        }
+    }
+    if(n>1)
+        prime_factors.push_back(n);
+    for(int p: prime_factors)
+        cout << p << " "; 
+}
+
+const int N = 100;
+vector<bool> isPrime(N, 1);
+vector<int> lp(N), hp(N);
+vector<int> divisors[N];
+int sum[N];
+int main(){
+    // vector<string> words = {"act","god","cat","dog","tac"};
+    // primeFactOptimal(36);
+    isPrime[0]=isPrime[1]=false;
+    // for(int i=2; i<N; ++i){
+    //     if(isPrime[i] == true){
+    //         for(int j=2*i; j<N; j+=i){
+    //             isPrime[j] = false;
+    //         }
+    //     }
+    // }
+    // To check whether 5 is prime or not, just do isPrime[5] i 0(1)
+
+    // lowest and higest prime factors of the given set of numbers
+    for(int i=2; i<N; ++i){
+        if(isPrime[i] == true){
+            lp[i]=hp[i]=i;
+            for(int j=2*i; j<N; j+=i){
+                isPrime[j]=false;
+                hp[j] = i;
+                if(lp[j]==0)
+                    lp[j]=i;
+            }
+        }
+    }
+    for(int ele:lp){
+        cout << ele << "\n";
+    }
+    cout << "highest PFs\n";
+    for(int e:hp){
+        cout << e << "\n";
+    }
+    int num;
+    cin>>num;
+    vector<int> prime_factors;
+    while(num>1){
+        int prime_factor = hp[num];
+        while(num%prime_factor == 0){
+            num /= prime_factor;
+            prime_factors.push_back(prime_factor);
+        }
+    }
+    for(int factor:prime_factors){
+        cout << factor << " ";
+    }
+    cout << "\n";
+
+    for(int i=2; i<N; ++i){
+        for(int j=i; j<N; j+=i){
+            divisors[j].push_back(i);
+            sum[j] += i;
+        }
+    }
+    cout << "Disvisors are \n";
+    for(int i=1; i<10; ++i){
+        for(int div:divisors[i]){
+            cout << div << " ";
+        }
+        cout << endl;
+    }
+}

@@ -1,0 +1,24 @@
+const [ Robots, setRobots ] = useState([ ]); // hooks the Robots state into our react store , setRobots is used to set the state of the robots 
+// [ a, b ] = [ 1, 2 ] this is nothing but array destructuring which is released with the newer version of ecmascript
+// We give the initial state of Robots (empty array here) inside the useState() method;
+
+
+useEffect is always rendered whenever our app loads.
+It may be a fetch call , setting one of the state.
+UseEffect is analoguos to the life cycle method.
+
+sequence of events (defining state via react hooks)
+-> When app renders it creates state
+-> Then it runs useEffect
+-> Then it fetched via an api and sets the robots state
+-> As soon as the state changes, our app rerenders
+-> Then again it runs useEffect and the same thing occurs again and again
+
+SOLUTION OF THIS PROBLEM
+useEffect( () => {
+	fetch(url)
+	.then(res => res.json())
+	.then(users => {setRobots(users)})
+}, [ ])	// Run useEffect only When the state/array is empty ie similar to component did mount life cycle method of class component
+
+

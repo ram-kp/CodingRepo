@@ -1,0 +1,33 @@
+=> west lab company
+HTML  -- DONE
+CSS (and preprocessors) -- DONE
+Javascript (ES6+ knowledge required)
+React (incl React Router and other popular libraries)
+Redux
+REST APIs
+Comfortable using git(DONE), docker.
+Very good understanding of ES6/ES7, JSX and Component Lifecycle.
+Deep practical knowledge of native Javascript, ES6, understanding the internals of frameworks like ReactJS, Angular or any other view libraries.
+Knowledge of modern authorisation techniques, such as JWT Tokens.
+Good understanding of common front-end development tools such as Babel, Webpack, NPM, Yarn etc.
+Has strong communication skills and self-accountability.
+
+
+react/node
+Full stack developer Everest group  
+3-5 years of development experience
+Ability to integrate with frontend developers, backend developers, APIs, dynamic content, and client engineers
+Fluency in
+HTML / CSS / Javascript
+GCP
+React
+Node / GraphQL
+Docker
+TypeScript
+Strong documentation history
+Adaptability, humility, hustle, and confidence
+
+tutanota mail
+shreydey1122@tutanota.com
+pass: iLOVEgodscreation
+6e81f5d915125f8cbe34b91e8314a3452973d69572a4eab371ec600ad0d275b2

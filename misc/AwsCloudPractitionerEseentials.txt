@@ -1,0 +1,103 @@
+Cloud Computing With the AWS Services (AWS Cloud Practitioner Essentials)
+
+>AWS comes with variety of services, be it cloud server, storage, etc.
+>AWS EC instance is a virtual server which is pretty much flexible or the resources allocation is dynamic. RECALL CLIENT SERVER MODEL.
+> CLOUD COMPUTING : The on-demand delivery of IT resources over the internet with pay-as-you-go pricing.
+> If we are using mySql database for our company and if we install mySql engine, it will facilitate in the competitive, for ex if create lots of backup on our end to ensure protection againt system failure , again it does not give us any edge.
+> Undifferentiated Heavy Lifting of IT, The works which are common, redundants, leads to wastage of resources, AWS takes it on its own responsibility.
+> With pay-as-you-go pricing we are provided with great great flexibility of managing servers and resources, which would have been hard incase of our own setup. There are times when your webpages are not accessed while there are times when the requests are overloaded.
+
+> Cloud Deployment Models - are selected based on essential cloud application components, preferred resource management tools, legacy IT infrastructure requirement.
+	Three models are:
+		1. cloud-based deployment: ->Run all parts of the application on the cloud. ->Migrate existing applications to the cloud. ->Design and build new applications in the cloud. you can build them using higher-level services that reduce the management, architecting, and scaling requirements of the core infrastructure.  For example, a company might create an application consisting of virtual servers, databases, and networking components that are fully based in the cloud.
+		2. On-Premise Management: ->Private Cloud Deployment. onpremises(in the business, building, enclosed area) deployement.  -> Deploy resources by using virtualisatin and resource management tools. For example, you might have applications that run on technology that is fully kept in your on-premises data center. 
+		3. Hybrid deployment: Deploying applications connected to on-premises infrastructure, a. Connect cloud-based resources to on-premises infrastructure. b. Integrate cloud-based resources with legacy IT applications. For example, suppose that a company wants to use cloud services that can automate batch data processing and analytics, With a hybrid deployment, the company would be able to keep the legacy applications on premises while benefiting from the data and analytics services that run in the cloud.
+
+> Benefits of Cloud Computing
+	1. Trade Upfront expense for variable expense: Upfront expense refers to data centers, physical servers and other resources that we would need to invest in before using them.
+	2. Stop spending money to run and maintain data centers
+	3. Stop guessing capacity : For example, you can launch Amazon EC2 instances when needed, and pay only for the compute time you use. Instead of paying for unused resources or having to deal with limited capacity, you can access only the capacity that you need. You can also scale in or scale out in response to demand.
+	4. Benefit from massive economies of scale: Because usage from hundreds of thousands of customers can aggregate in the cloud, providers, such as AWS, can achieve higher economies of scale. The economy of scale translates into lower pay-as-you-go prices. 
+	5. Increased speed and agility: The flexibility of cloud computing makes it easier for you to develop and deploy applications. This flexibility provides you with more time to experiment and innovate. When computing in data centers, it may take weeks to obtain new resources that you need. By comparison, cloud computing enables you to access new resources within minutes.
+	6. Go Global in minutes: Fast deployment of services on the cloud.
+> EXAMPLE COFEE SHOP : The customer client and the employee as server , with each employee acting as EC2 instance.
+
+> EC2 INSTANCES (Virtual Servers)
+Amazon Elastic Compute Cloud (Amazon EC2) provides secure, resizable compute capacity in the cloud as Amazon EC2 instances. 
+	- Amazon already owns and has implemented a massive server base.  We can access those servers using EC2 instances. AWS is operating at a massive amount of compute capacity. We can use any portion of it.
+	- The server we get to access the virtual servers owned by amazon is know as EC2 . highly flexible, cost effective and quick.
+	- We can run an EC2 instance whenever there is more work.
+	- just imagine the cost of setting the server on premises, it is humonguous.
+	- Here in AWS we just pay for the EC2 instances that are running.
+	- MULTITENANCY - Sharing underlying hardware between virtual machines. - Hypervisor responsible for sharing underlying resources among running EC2 instances.
+	- HyperVisor also responsible for isolating virtal machines. One EC2 instance are not aware of the other EC2 on the same host. Thus they run independently even though sharing resources and are secure.
+	- When spinning EC2 instances we can customize harware/OS configuration. Choose either linux or windows. What kind of software we are using. start with less instances and then increasing. Give instances more memory or CPU i.e. vetical scaling. 
+
+> Just like our cofee shop have different kinds of employees ie cashier, waiter, cook., similarly we have EC2 instances with different skill sets.
+	- Each Amazon EC2 instance type is grouped under an instance family. Optimized for different tasks.
+	- Amazon EC2 families are: General Purpose(Balanced resources/Diverse workloads EX-app servers, gaming servers, backend servers, small and medium DB) , Compute optimized(Compute Intesive tasks, gaming servers, high performing computing/Processors) , memory optimized(Memory intensive tasks, real-time processing of a large amount of unstructured data) , Accelerated Computing(Floating Point Number calculations, Graphics processing, Data pattern matching and Utilize hardware acceletors) and Storage Optimized(High performance for locally stored data, designed for workloads that require high, sequential read and write access to large datasets on local storage, You can think of input operations as data put into a system, such as records entered into a database. An output operation is data generated by a server. An example of output might be the analytics performed on the records in a database. If you have an application that has a high IOPS requirement, a storage optimized instance can provide better performance).
+	- Here we provision the workload exactly to demand.
+
+> EC2 Pricing models
+> Amazon EC2 Auto Scaling : Dynamic and predictive scaling.
+> Properly Distribute Traffic using Amazon Elastic Load balancers. (analoguos to several customers standing infront of few cashiers in cofee shop.)
+> True DeCooupled Architecture with regional constructed Elastic Load Balancers.
+> Elastic Load Balancing is the AWS service that automatically distributes incoming application traffic across multiple resources, such as Amazon EC2 instances. The requests route to the load balancer first. Then, the requests spread across multiple resources that will handle them
+> Although Elastic Load Balancing and Amazon EC2 Auto Scaling are separate services, they work together to help ensure that applications running in Amazon EC2 can provide high performance and availability. 
+> Tight Coupled Architecture, failure one component will degrade/terminate the communication, Where as in Loosely Coupled Architecture(Buffering and Queuing) Single failure wont cause cascading failures.
+> Microservices(Loosely Coupled Architecture) :  if a single component fails, the other components continue to work because they are communicating with each other. Two services facilitate application integration: Amazon Simple Notification Service (Amazon SNS) and Amazon Simple Queue Service (Amazon SQS). Amazon Simple Notification Service (Amazon SNS) is a publish/subscribe service. Using Amazon SNS topics, a publisher publishes messages to subscribers. This is similar to the coffee shop; the cashier provides coffee orders to the barista who makes the drinks. In Amazon SNS, subscribers can be web servers, email addresses, AWS Lambda functions, or several other options. 
+> Using Amazon SQS, you can send, store, and receive messages between software components, without losing messages or requiring other services to be available. In Amazon SQS, an application sends messages into a queue. A user or service retrieves a message from the queue, processes it, and then deletes it from the queue.
+> SERVERLESS COMPUTING: The term “serverless” means that your code runs on servers, but you do not need to provision or manage these servers. With serverless computing, you can focus more on innovating new products and features instead of maintaining servers. Another benefit of serverless computing is the flexibility to scale serverless applications automatically. Serverless computing can adjust the applications' capacity by modifying the units of consumptions, such as throughput and memory. 
+> AWS Lambda is a service that lets you run code without needing to provision or manage servers. While using AWS Lambda, you pay only for the compute time that you consume. Charges apply only when your code is running. You can also run code for virtually any type of application or backend service, all with zero administration. For example, a simple Lambda function might involve automatically resizing uploaded images to the AWS Cloud. In this case, the function triggers when uploading a new image. 
+
+> In AWS, you can also build and run CONTAINERIZED applications. ( Containers provide you with a standard way to package your application's code and dependencies into a single object. You can also use containers for processes and workflows in which there are essential requirements for security, reliability, and scalability. )
+> Amazon Elastic Container Service (Amazon ECS) is a highly scalable, high-performance container management system that enables you to run and scale containerized applications on AWS. Amazon ECS supports Docker containers. DOCKER is a software platform that enables you to build, test, and deploy applications quickly. With Amazon ECS, you can use API calls to launch and stop Docker-enabled applications.
+> Amazon Elastic Kubernetes Service (Amazon EKS) is a fully managed service that you can use to run Kubernetes on AWS. Kubernetes is open-source software that enables you to deploy and manage containerized applications at scale. A large community of volunteers maintains Kubernetes, and AWS actively works together with the Kubernetes community. As new features and functionalities release for Kubernetes applications, you can easily apply these updates to your applications managed by Amazon EKS.
+	~ These are Container Orchestration Tools
+> AWS Fargate : AWS Fargate is a serverless compute engine for containers. It works with both Amazon ECS and Amazon EKS.  When using AWS Fargate, you do not need to provision or manage servers. AWS Fargate manages your server infrastructure for you. You can focus more on innovating and developing your applications, and you pay only for the resources that are required to run your containers.
+> Dedicated Instances run in a virtual private cloud (VPC) on hardware that is dedicated to a single customer.
+
+> GLOBAL INFRASTRUCTURE AND RELIABILITY
+	- WE NEED HIGH AVAILABILITY AND FAULT TOLERANCE. 
+	- The data centers need to be diversed so that failure of one of them doesnt lead to entire server to go down. As it would lead to loss of trust and money.
+	- AWS operates in selected region.
+	- To understand the AWS global infrastructure, consider the coffee shop. If an event such as a parade, flood, or power outage impacts one location, customers can still get their coffee by visiting a different location only a few blocks away.
+	- Each regions is made up of several data centers.
+	- When you launch an EC2 instance it launches a virtual machine on one of the hardwares at the AZs data centers.
+	- Each data centers contains several isolated availability zones. not too close to each other. Run accross two availability zones in a region.
+> Edge locations are locations where the customers are meagre. In this kind of region to make the services available the data is cached in that region inorder to improve latency.
+> manage tools like Beanstalk and cloud Formation dont even need you to set up the EC2, DB, other services by yourself. It does it all by itself by analyzing your code/app.
+> With AWS Elastic Beanstalk, you provide code and configuration settings, and Elastic Beanstalk deploys the resources necessary to perform the following tasks: Adjust capacity, Load balancing, Automatic scaling, application health monitoring.  With AWS CloudFormation, you can treat your infrastructure as code. This means that you can build an environment by writing lines of code instead of using the AWS Management Console to individually provision resources.
+
+> Amazon VPC enables you to provision an isolated section of the AWS Cloud. Within a virtual private cloud (VPC), you can organize your resources into subnets. A subnet is a section of a VPC that can contain resources such as Amazon EC2 instances.
+> outer to inner => client -> AWS Cloud -> VPC cloud(Internet gateway) -> subnets(ACLs, stateless) -> resourcesEC2(security groups, stateful).
+
+> Domain Name System: You can think of DNS as being the phone book of the internet. DNS resolution is the process of translating a domain name to an IP address. 
+> Amazon Route 53 is a DNS web service. It gives developers and businesses a reliable way to route end users to internet applications hosted in AWS. You can register new domain names directly in Route 53. The following example describes how Route 53 and Amazon CloudFront work together to deliver content to customers.
+	- A customer requests data from the application by going to AnyCompany’s website. 
+	- Amazon Route 53 uses DNS resolution to identify AnyCompany.com’s corresponding IP address, 192.0.2.0. This information is sent back to the customer. 
+	- The customer’s request is sent to the nearest edge location through Amazon CloudFront. 
+	- Amazon CloudFront connects to the Application Load Balancer, which sends the incoming packet to an Amazon EC2 instance.
+
+> Storage and databases
+	- Elastic Block Storage : Permanent storage for attached to EC2 instances, WHen we modify a file in block storage , only the piece that are changed are updated. While when a file in object storage is modified, the entire object is updated.
+	- Amazon simple storage service S3 : Provides object level storage, stores data as objects in buckets. offers unlimited storafe space, max file size for an object is 5TB. Versioning feature to track changes to the objects over time.
+	- Amazon S3 storage classes : Pay for what you use, based on best fit for your busniess and cost.
+	- EBS is better when updating changes to data, while just for storing massive data S3 will come in handy.
+
+	
+
+// AWS serverless computing
+serverless computing -> run and manage the services without having to manage the infrastructure. No need to provision. only pay for the compute time.
+Why use -> User only has to look after its product rather than bothering about managing tools and infrastructure.
+4 benefits of serverless -> a. No server management b. Flexible scaling c. pay for the value d. Automated High availability and fault tolerant.
+
+-> Automatic speech recognition > speech to text
+-> Natural Language Understanding, Chat bot need to reply with same modality
+-> Text to speech
+AMAZON LEX:
+ It provides the advanced deep learning functionalities of automatic speech recognition and natural-language understanding that powers Amazon Alexa.
+AMAZON POLLY: Contains 50 available voices in which it provides the audio response to the query of the user sent by the LEX.
+
+
+

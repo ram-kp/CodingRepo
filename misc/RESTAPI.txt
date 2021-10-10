@@ -1,0 +1,35 @@
+REST APIs
+> Client communicate with Server using HTTP protocol, Client Server model.
+> Rest is basically a convention for building these HTTP services, We use http to provide support to create, read , update and delete.
+> Client can send https req to endpint to talk to the service.
+> for ex http://vildly.com/api/customers , here the request will be send unsecurely to our customers endpoint.
+> The type of HTTP request determines the purpose of request ie (get post put delete)
+> Api is created on the server and allows the user to make request to fetch data through that api.
+> Set of rules that allows users to talk to each other
+> Rest defines how the api looks like. It stands for Representational state model . Set of rules that developers follow when they create their api. Almost all apis nowadays are rest apis. CRUD is another set rules we follow to create our api, every website is a CRUD in a sense. consider the example of creating, reading .. profiles.
+> NODE js is a javascript runtime built on chrome V8 engine.
+
+
+
+
+CREATING REST API
+-> .env put secretts then create config  file to export it in a different way.
+-> config folder create index.js, so every env vars will be exported from here.
+-> Browsers can only make get request.
+-> bodyParser is deprecates now and available with express -v .14+
+-> Express and Node follow this principle of routing in order to send data to the client. The route is our endpoint from where we get the requested data by the server.
+-> We will be handling users. and will create certain routes in order to do so.
+-> server.js will only setup the server create all routes in seperate file and export Routes.
+-> Then after that just go to server.js and import it, then do app.use('/routeName' , importedRoute)		// this is an elegant way to handle all the routes	/
+-> In order to create a account/profile in DB we use app.post method.
+-> To test the post data we cannot use chrome or any browser of that sort because whenever we are writing anything in the url bar it is making only the get request.
+-> Thats why we need a software to help us test the api, this is where postman and insomnia comes in picture.
+-> Type the url with desired route in postman url box and send the get request to test.
+-> Type the url, enter the data in json text format inside the body of request and set the method as POST. Then push it to the database
+-> Type the url, Set the method as DELETE Enter the unique id/field of the user to be deleted by requesting on /:id , then immediately delete the record of that user.
+->Type the  url followed by unique id, Set the method as PATCH, Enter only the patch data of that user to be modfied. Then send the request to the server. The server will find that record and update it.
+
+> API allows two applications to talk to each other.
+> When you run an app on your phone the app connects to the internet and sends the data to the server, 
+	the server then retrieves the data, performs the necessary actions and sends it back to the phone. 
+	The application then gets that data and presents us the data in a readable way.

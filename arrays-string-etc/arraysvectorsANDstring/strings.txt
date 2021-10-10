@@ -1,0 +1,335 @@
+
+bool is_pal(string s, int l, int r){
+    for(; l<r; l++, r--){
+        if(s[l] != s[r]){   // O(n*n*n)
+            return false;
+        }
+
+    }
+        return true;
+}
+
+void longest_pal(string s, int n){
+    int maxL = 0;
+    int L=0, R=0;
+    string subs;
+    for(int L=0; L<n; L++){
+        for(int R=L; R<n; R++){
+            if(is_pal(s, L, R) && R-L+1>maxL ){
+                maxL = R-L+1;
+                subs = s.substr(L,maxL);
+                cout << "subs: " << subs << "\n";
+            }
+        }
+    }
+    cout << "subs: " << subs << " length: " << maxL << "\n";
+}
+
+void longest_rec_seq(string a){
+    int n = a.length();
+    string s;
+    string S;
+    int maxLen = 0;
+    int len=0;
+        for(int j=0; j<n; j++){
+            if(a[j] == a[j+1]){
+                len++;
+                s.push_back(a[j]);
+            }
+            else{
+                if(len > maxLen){
+                    maxLen = len>maxLen?len:maxLen;
+                    S = s;
+                }
+                len=0;
+                s = "";
+            }
+        }
+    cout<< S << " " << maxLen << "\n";
+}
+
+void allSubSeq(string s){
+    int n = s.length();
+    int m = n<<2;
+    vector<string> sets;
+    for(int i=0; i<m; i++){
+        int t = i;
+        string st;
+        for(int j=0; j<n; j++){
+            if(t&1){
+                st.push_back(s[j]);
+            }
+            t = t>>1;
+        }
+        sets.push_back(st);
+    }
+    for (auto i : sets)
+    {
+        cout << i << "\n";
+    }
+}
+
+void printAllSubSeq(string s, int i, string cur){
+    if(i == s.length()){
+        cout << cur << "\n";
+        return;
+    }
+    printAllSubSeq(s, i+1, cur+s[i]);
+    printAllSubSeq(s, i+1, cur);
+}
+
+void printAllSubSeq2(string s, int i, string cur){
+    if(i==s.length()){
+        return;
+    }
+    if(!cur.empty()){
+        cout << cur << "\n";
+        return;
+    }
+    for(int k=0; k<s.length(); ++k){
+        cur+=s[k];
+        printAllSubSeq(s, k+1, cur);
+        cur.erase(cur.length()-1);
+    }
+}
+
+void permute(string s, int i){
+    if(i == s.length()){
+        cout << s << "\n";
+    }
+    for(int k=i; k<s.length(); ++k){
+        swap(s[i], s[k]);
+        permute(s, i+1);
+        swap(s[i], s[k]);
+    }
+}
+
+void equalZeroOneBinSubStrings(string s){
+    int n = s.length();
+    vector<string> bins;
+    int count0 =0, count1=0;
+    string st;
+    for(int i=0; i<n ; ++i){
+        if(s[i]=='0'){
+            st.push_back('0');
+            count0++;
+        }
+        else{
+            st.push_back('1');
+            count1++;
+        }
+        if(count0 == count1){
+            bins.push_back(st);
+            st="";
+            count0=0;
+            count1=0;
+        }
+
+    }
+    for(string e: bins){
+        cout << e << "\n";
+    }
+}
+
+void editDistance(string s1, string s2){
+    int n = s1.length();
+    int m = s2.length();
+
+    int k=0, op_ctr=0;
+    for(int i=0; i<m; ){
+        if(s2[i] == s1[k]){
+            i++;
+            k++;
+        }
+        else if(s2[i] != s1[k]){
+            int l;
+            for(l=k+1; l<n; l++)
+                if(s1[l] == s2[i]){
+                    op_ctr++;
+                    swap(s1[k], s1[l]);
+                    k++;
+                    i++;
+                    cout << op_ctr << "\n";
+                    break;
+                } 
+            if(l==n){
+                op_ctr++;
+                i++;
+                cout << op_ctr << "\n";
+                continue;
+            }  
+        }
+    }
+    op_ctr+=(n-k);
+    cout << "no of operations are: " << op_ctr <<"\n";
+}
+
+
+void nextPermut(vector<int> &a){
+    int n = a.size();
+    int start = -1;
+    for(int i=n-1; i>=1; --i){
+        if(a[i]>a[i-1]){
+            start = i;
+            break;
+        }
+    }
+    if(start == -1){
+        reverse(a.begin(), a.end());
+        for(auto e: a)
+            cout << e << " ";
+        cout << "\n";
+        return;
+    }
+    auto e = lower_bound(a.rbegin(), a.rend()-start+1, a[start-1]);
+    swap(*e, a[start-1]);
+    reverse(a.begin()+start, a.end());
+    for(auto e: a){
+        cout << e << " "; 
+    }
+    cout << "\n";
+}
+
+void parenthesisChecker(string s){
+    map<char, int> mp;
+    mp.insert({'}', '{'});
+    mp.insert({')', '('});
+    mp.insert({']', '['});
+
+    cout << mp['{'] << "\n";
+    stack<char> s1;
+    for(int i=0; i<s.length(); ++i){
+        cout << s1.top() << " " << s[i] << "\n";
+        if(s1.empty()){
+            s1.push(s[i]);
+            continue;
+        }
+        if(s1.top() == mp[s[i]]) { 
+            cout << "entered here\n";
+            s1.pop(); 
+        }
+        else {
+            if(s[i] == '}' || s[i] == ')' || s[i] == ']'){
+                cout << "Not balanced\n";
+                return;
+            }
+            else
+                s1.push(s[i]);
+        }
+
+    }
+    if(s1.empty())
+        cout << "balanced\n";
+    else
+        cout << "not Balanced\n";
+}
+
+void wordBreak1(vector<string> &stringSet, string s){
+    int k=0;
+    while(k<s.length()){
+        cout << "k: " << k << "\n";
+        int i;
+
+
+
+        for(i=0; i<stringSet.size(); ++i){
+            cout << stringSet[i] << "\n";
+            int tmp = k;
+            int j;
+            for(j=0; j<stringSet[i].length();){
+                if(stringSet[i][j] == s[k]){
+                    cout << "matched character " << s[k] << "\n";
+                    j++; k++;
+                }
+                else{
+                    k = tmp;
+                    break;
+                }
+            }
+
+            if(j==stringSet[i].length()){
+                cout << "string " << stringSet[i] << " got matched\n";
+                break;
+            }
+
+        }
+
+
+
+
+
+        if(i==stringSet.size()){
+            cout << "cannot be segmented\n";
+            return;
+        }
+
+        cout << "word got matched " << stringSet[i] << "\n";
+    }
+    if(k== s.length()){
+        cout << "String can be segmented\n";
+    }
+}
+
+void kmp(string s, string p){
+    int n = s.length();
+    int m = p.length();
+    vector<int> lcs(m+1);
+    lcs[0] = 0;
+    int j=1;
+    for(int i=j+1; i<=m; ++i){
+        if(p[j] != p[i]){
+            lcs[i] = 0;
+            j=0;
+        }
+        else if(p[j] == p[i]){
+            lcs[i] = j+1;
+            j++;
+        }
+    }
+    for(auto e:lcs){
+        cout << e << " ";
+    }
+    cout << "\n";
+
+
+
+
+
+
+
+
+
+
+    cout << s << "\n" << p << "\n";
+    j=-1;
+    lcs[0] = -1;
+    int done = -1;
+    int start = 0;
+    for(int i=0; i<n;){
+        cout << "i: " << i << " j: " << j << "\n";
+        if(j==-1) i++;
+        if(s[i] == p[j+1]){
+            cout << "matched\n";
+            j++; i++;
+        }
+        else if(s[i] != p[j+1]){
+            // if(j==-1){
+            //     cout << "j again went to -1, and first char of pattern didnt match with " << s[i] << "\n"; 
+            //     start = i;
+            //     i++;
+            //     continue;
+            // }
+            j = lcs[j];
+            cout << "jdash: " << j << "\n";
+        }
+        if(j == m){
+            done = 1;
+            cout << "j reached last index: " << j << "\n";
+            cout << "pattern exist at index: " << start << "\n";
+            j=-1;
+        }
+    }
+    if(done == -1){
+        cout << "pattern does not exists\n";
+    }
+}

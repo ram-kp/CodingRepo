@@ -1,0 +1,30 @@
+git commands that ive learnt 
+
+1. simple cloning into repository
+	git clone url
+2. git add .
+3. git commit -m "message"  // commiting the latest changes
+4. git push	// push the changes into our repository
+
+5. git pull 	// pulling the latest updated files from our repository
+
+6. branching -> git branch -> git branch <branchName> -> git checkout <branchName> or git checkout -b branchname
+
+7.
+	Then the issue is that you have not configured git to always create new branches on the remote from local ones.
+	The permanent fix if you always want to just create that new branch on the remote to mirror and track your local branch is:
+
+ 	git config --global push.default current
+
+8. git diff - to see changes
+
+9. forking repository -> click fork(creates your version of repository) -> add and commit changes -> 
+	-> either git push origin master or create new branch and push in that(later we can create pull request to add changes to the organizations version of project)
+
+10. my-project (repo name on server) & origin (short name on local repository alias for url)
+
+11. ORIGIN , why cant we have origin named as our remote repo -> this is because if my friend forks my remote repo i would two remote repos with same name ( but this problem eleminated as we now have two remotes 1.origin 2. Friend (git remote add <remote repo name> )
+12. If i forked a project and want to be updated with my parent version i must do git remote add upstream (url of parent), then i can pull from it to remain updated
+13. To add to the previously made repo:
+	--> git init --> git remote add origin (url) --> git pull origin main --> git add . --> git commit --> git push origin master
+ 

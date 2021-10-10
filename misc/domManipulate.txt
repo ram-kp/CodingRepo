@@ -1,0 +1,41 @@
+DOM MANIPULATION
+
+1. Adding elements
+	- body.append() vs appendChild() ( former appends multiple and even strings)
+2. Create Elements and inner text
+	- const div = doc.createElement("div") -> div.innerText = "Hello" -> body.append(div)
+	- difference b/w div.innerText and textContent is that innerText doesnt displays the hidden text 
+3. Modifying element html
+	- div.innerHTML = "<h1> heee </h1>" // not a secure eawyonly way to add html element from string
+4. Removing HTML elements
+	- div.remove() // completely removes div from DOM
+
+5. Modifying element attributes
+	- div.getAttribute('width') 
+	- setAttribute('title' , 'great') or div.id = ""
+	- removeAttribute("class")
+
+6. Modifying Element style directly
+	- spanH1.style.color= "red" // sets the text color red
+
+7. Modifying element classes
+	- spanH1.classList.remove/add('container');
+
+Resources for FREE TEMPLATES
+
+https://zerotomastery.io/resources:
+New: https://cruip.com/
+New: Bootstrap Templates 0
+Bootstrap Templates 1
+Creative Tim Templates
+Bootstrap Templates 2
+Animate.css
+
+https://drive.google.com/drive/folders/1yKTfaYtFZaeVI5f-NsaOVx-Ezg-nPK7s
+
+
+EVENT LISTENERS
+
+
+
+

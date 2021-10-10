@@ -1,0 +1,79 @@
+Reume CheckList
+
+1. Presentation
+=> a.  formatting  - basic template, easy to read ( if college gave a format use that only)
+                           - Try to create on a simplistic template and 1 pager resume( see hirenation or google others for template).
+      b.  Space Utilisation - Choose Resume template that does not have any un-utilised space, it should not look clumsy.
+
+2. Your Name & online handles 
+=> a. Phone
+      b. Email
+      c. github	- use hyperlinks
+      d. LinkedIn	- use hyperlinks
+
+3. Ordering
+=> A. Educational Details  - Must Include College-level Details  (Bold the essentials like college name, CGPA)
+     		        - Can also include class 12th level details
+
+      B. Technical Skills  -  Languages : such as C, C++, javascript, java etc
+		  -  developer-domain expertise : such as webDev/android/ML etc
+		  -  FrameWorks : such as React/ Spring/ Hibernate/ Struts etc
+		  -  Subjective Expertise : OOPS/ OS/ DBMS etc
+		  -  Miscelleneous : AWS componenets/Elastic Search/tool_used etc
+
+       C. Prior Experience  - InternShips or prior company Experience - How to write?
+		    - how to write?
+			-Heading Bold
+			-Problem Statement you worked on 
+				-> no need to explain things fully as things are confidential
+				-> [BOLD] strong words
+			- Tech-solve you provided & your contribution in that
+				-> [BOLD] tech used/Design Pattern/Best Practices
+			- Include Impact created and stats
+				-> [BOLD] stats
+				-> Example - Previously we were getting a latency of 80sec and now after my code/Design, it is reduced to 1.25 seconds
+
+D. College Projects/Freelance Projects/Open Source Contribution
+	- Incase of giving freelance plz tell that you did it just for exploring and nothing more than that
+	- How to write projects?
+	(HEADING)	- bold heading 
+			- source code
+			- Hyperlinks if active/hosted live
+
+	(OVERVEIW)	- Just give a glimpse of problem you are trying to solve -Boldly strong words
+			- Provide Tech Involved(boldify the tech stack such as mern)
+			- always add impact created and stats around it
+				-> If hosted LIVE, add how may active users are there and what challenges you faced and resolved how?
+				-> If not, Provide the details of different design principals used, scalability aspect. No of lines of code written etc of code.
+
+
+
+
+E. Achievements
+	- Different coding platform stats -> example - AIR 11 on GFG, 5* Codechef, 500 questions on Leetcode
+	- Point around/Hackathons/Open-source contribution/Contests/Challenge/Udacity-Sholarships/Different-Coding Programmes
+	- Though certificates doesnt matter , you can include them as well in this section
+	- Teaching assistance at some ABCD institute
+
+4. Points to Keep in mind
+	- Beautify and show your stength and weaknesses
+	- Make it more tech-oriented
+	- Always provide your work with stats and impact created 
+	- Always try to host your project in real world scenerio
+	- always boldify tech words to grab attention
+	- always include sourceCode hyperlinks
+	- avoid fancy resume template, try to create a simplistic and easy to read resume
+	- You can skip the ordering if you hae SOLID superpower in one domain, ex: CP, Dev , IN THAT CASE YOU CAN KEEP THAT SECTION ABOVE ALL TO GRAB ATTENTION OF RECRUITER
+	- If You Dont have Prior-company experience or any internship experience. No need to worry just skip that section and add 2-3 SOLID projects based on different tech stacks and unique ideas
+	- Never write Project details in paragraphs.  Give bullet point experience
+
+5. Avoid these mistakes
+	- Interests like Dancing, Singing, Gaming etc -> As we are here for a tech job, lets provide only job description required details
+	- Never include Level of profieciency on skills -> example : C++ me 5/5 etc
+	- Courses taken and their certificates - Generally they does not create any sort of impact on recruiters but if ypu want to fill 1-2 line of space you can include them(along with certificates hyperlinks)
+	- Languages Known : Hindi/Bhojpuri/English etc
+	- Extra Curricular  or PORs 
+		- Not that beneficial in case of tech-job resume shortlisting
+		- If related to coding/Development, then it makes sense to add in resume
+
+- Relevel = register and get the job if you have the required set of skills.

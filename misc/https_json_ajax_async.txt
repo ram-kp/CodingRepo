@@ -1,0 +1,7 @@
+*AJAX
+--> The loading up of parts of web pages is made possible through ajax, ex: amazon nav bar remain intact while its body loads, google search reccommendations
+--> Ajax has feature such as https(get post request) , Fetch() api(fetching small chunks of data), Json()(converting json format into js object)
+
+*XHR(xml http request)
+--> A request that is sent to the web server for request of data;
+
